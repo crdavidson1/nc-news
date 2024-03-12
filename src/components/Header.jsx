@@ -60,7 +60,7 @@ export default function Header(props) {
         </ListItem>
         <Divider />
         {topics.map((topic, index) => (
-          <ListItem key={topic.article_id} disablePadding>
+          <ListItem key={index} disablePadding>
             <ListItemButton>
               <ListItemText primary={topic.slug} />
             </ListItemButton>
