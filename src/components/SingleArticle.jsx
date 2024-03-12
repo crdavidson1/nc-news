@@ -18,6 +18,7 @@ export default function SingleArticle({users, setUsers}) {
     const articleId = useParams().article_id
     const [article, setArticle] = useState({})
     const [comments, setComments] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         getArticle(articleId).then((response) => {
             
@@ -28,82 +29,84 @@ export default function SingleArticle({users, setUsers}) {
         })
         getUsers().then((response) => {
             setUsers(response.data.users)
+            setIsLoading(false)
         })
-    }, [])
+    }, [articleId])
     const date = new Date(article.created_at).toDateString()
-    if (!users) {
+    if (isLoading) {
         return <div>Loading...</div>
-      }
-    return (
-        <Box sx={{ 
+    } else {
+        return (
+            <Box sx={{ 
+                width: '100%' - drawerWidth, 
+                bgcolor: 'background.paper',
+                ml: { sm: `${drawerWidth+30}px` },
+                }}>
+                <img src={article.article_img_url} width="100px" alt="" />
+                <Typography
+                variant="h4"
+                >{article.title}  
+                </Typography>
+                <h3>{date}</h3>
+                <h3>Author: {article.author}p</h3>
+                <h4>Topic: {article.topic}</h4>
+                <p>{article.body}</p>
+                <Box sx={{ 
             width: '100%' - drawerWidth, 
             bgcolor: 'background.paper',
-            ml: { sm: `${drawerWidth+30}px` },
             }}>
-            <img src={article.article_img_url} width="100px" alt="" />
+            
+            <br></br>
             <Typography
             variant="h4"
-            >{article.title}  
+            sx={{ml: '70px'}}
+            >
+            Comments  
             </Typography>
-            <h3>{date}</h3>
-            <h3>Author: {article.author}p</h3>
-            <h4>Topic: {article.topic}</h4>
-            <p>{article.body}</p>
-            <Box sx={{ 
-        width: '100%' - drawerWidth, 
-        bgcolor: 'background.paper',
-        }}>
-        
-        <br></br>
-        <Typography
-          variant="h4"
-          sx={{ml: '70px'}}
-        >
-          Comments  
-        </Typography>
-        <br></br>
-        <Divider></Divider>
-        <nav aria-label="article list">
-          <List>
-          {comments.map((comment) => {
-                return (
-                    <ListItem key={comment.comment_id} disablePadding>
-                      <ListItemButton>
-                        <ListItemAvatar>
-                            <Avatar src={users.filter((user)=>{
-                                return user.username === comment.author
-                            })[0].avatar_url} />
-                        </ListItemAvatar>
-                        <ListItemText
-                        primary={comment.author}
-                        secondary={
-                          <React.Fragment>
-                          <Typography
-                            component="span"
-                            variant="subtitle1"
-                            color="text.primary"
-                          >
-                            {comment.body}
-                          </Typography>
-                          <Typography
-                            component="span"
-                            variant="body2"
-                            color="text.secondary"
-                          >
-                            <br></br>
-                            {comment.votes}  
-                          </Typography>
-                        </React.Fragment>
-                          }
-                        />
-                      </ListItemButton>
-                    </ListItem>
-                );
-            })}
-          </List>
-        </nav>
-      </Box>
+            <br></br>
+            <Divider></Divider>
+            <nav aria-label="article list">
+            <List>
+            {comments.map((comment) => {
+                    return (
+                        <ListItem key={comment.comment_id} disablePadding>
+                        <ListItemButton>
+                            <ListItemAvatar>
+                                <Avatar src={users.filter((user)=>{
+                                    return user.username === comment.author
+                                })[0].avatar_url} />
+                            </ListItemAvatar>
+                            <ListItemText
+                            primary={comment.author}
+                            secondary={
+                            <React.Fragment>
+                            <Typography
+                                component="span"
+                                variant="subtitle1"
+                                color="text.primary"
+                            >
+                                {comment.body}
+                            </Typography>
+                            <Typography
+                                component="span"
+                                variant="body2"
+                                color="text.secondary"
+                            >
+                                <br></br>
+                                {comment.votes}  
+                            </Typography>
+                            </React.Fragment>
+                            }
+                            />
+                        </ListItemButton>
+                        </ListItem>
+                    );
+                })}
+            </List>
+            </nav>
         </Box>
-        
-      );
+            </Box>
+            
+        );
+    }
 }
