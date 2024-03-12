@@ -8,6 +8,14 @@ const getArticles = () => {
     });
 };
 
+const getArticle = (article_id) => {
+  return axios
+    .get(`https://backend-project-cr4a.onrender.com/api/articles/${article_id}`)
+    .then((data) => {
+      return data;
+    });
+};
+
 const getTopics = () => {
   return axios
     .get("https://backend-project-cr4a.onrender.com/api/topics")
@@ -16,4 +24,4 @@ const getTopics = () => {
     });
 };
 
-export { getArticles, getTopics }
+export { getArticles, getArticle, getTopics }
