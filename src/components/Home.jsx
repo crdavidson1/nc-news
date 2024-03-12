@@ -12,9 +12,9 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import {drawerWidth} from '../components/Header'
+ 
 
-export default function Home() {
-    const [articles, setArticles] = useState([])
+export default function Home({articles, setArticles}) {
     useEffect(() => {
         getArticles().then((response) => {
             
@@ -38,6 +38,7 @@ export default function Home() {
           {articles.map((article) => {
                 return (
                     <ListItem key={article.article_id} disablePadding>
+                      <Link to={`/articles/${article.article_id}`}>
                       <ListItemButton>
                         <ListItemAvatar>
                           <Avatar src={article.article_img_url} />
@@ -74,6 +75,7 @@ export default function Home() {
                           }
                         />
                       </ListItemButton>
+                      </Link> 
                     </ListItem>
                 );
             })}

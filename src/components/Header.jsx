@@ -55,7 +55,7 @@ export default function Header(props) {
     <div>
       <Toolbar />
       <List>
-        <ListItem>
+        <ListItem key='heading'>
           Topics
         </ListItem>
         <Divider />
