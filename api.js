@@ -16,6 +16,14 @@ const getArticle = (article_id) => {
     });
 };
 
+const getComments = (article_id) => {
+  return axios
+    .get(`https://backend-project-cr4a.onrender.com/api/articles/${article_id}/comments`)
+    .then((data) => {
+      return data;
+    });
+};
+
 const getTopics = () => {
   return axios
     .get("https://backend-project-cr4a.onrender.com/api/topics")
@@ -24,4 +32,12 @@ const getTopics = () => {
     });
 };
 
-export { getArticles, getArticle, getTopics }
+const getUsers = () => {
+  return axios
+    .get("https://backend-project-cr4a.onrender.com/api/users")
+    .then((data) => {
+      return data;
+    });
+};
+
+export { getArticles, getArticle, getComments, getTopics, getUsers }

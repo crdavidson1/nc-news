@@ -14,13 +14,13 @@ import Divider from '@mui/material/Divider';
 import {drawerWidth} from '../components/Header'
  
 
-export default function Home({articles, setArticles}) {
-    useEffect(() => {
-        getArticles().then((response) => {
-            
-            setArticles(response.data.articles)
-        })
-    }, [])
+export default function Home() {
+  const [articles, setArticles] = useState([])
+  useEffect(() => {
+      getArticles().then((response) => {
+          setArticles(response.data.articles)
+      })
+  }, [])
     return (
       <Box sx={{ 
         width: '100%' - drawerWidth, 

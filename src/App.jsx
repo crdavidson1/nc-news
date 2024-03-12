@@ -6,16 +6,16 @@ import Home from './components/Home'
 import SingleArticle from './components/SingleArticle'
 
 function App() {
-  const [articles, setArticles] = useState([])
+  const [users, setUsers] = useState([])
   return (
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Home articles={articles} setArticles={setArticles}/>} />
+        <Route path="/" element={<Home/>} />
         <Route
           path="/articles/:article_id"
           element={
-            <SingleArticle articles={articles}/>
+            <SingleArticle users={users} setUsers={setUsers}/>
           }
         />
       </Routes>
