@@ -24,6 +24,15 @@ const getComments = (article_id) => {
     });
 };
 
+const insertVotes = (article_id, newVote) => {
+  console.log(newVote)
+  return axios
+    .patch(`https://backend-project-cr4a.onrender.com/api/articles/${article_id}/`, {inc_votes: newVote})
+    .then((data) => {
+      return data;
+    });
+};
+
 const getTopics = () => {
   return axios
     .get("https://backend-project-cr4a.onrender.com/api/topics")
@@ -40,4 +49,4 @@ const getUsers = () => {
     });
 };
 
-export { getArticles, getArticle, getComments, getTopics, getUsers }
+export { getArticles, getArticle, getComments, getTopics, getUsers, insertVotes }
