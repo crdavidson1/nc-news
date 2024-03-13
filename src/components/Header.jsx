@@ -20,7 +20,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-const drawerWidth = 240;
+const drawerWidth = 180;
 
 export {drawerWidth}
 
@@ -56,13 +56,13 @@ export default function Header(props) {
       <Toolbar />
       <List>
         <ListItem key='heading'>
-          Topics
+        <ListItemText primary={<Typography align="center">Topic</Typography>} />
         </ListItem>
         <Divider />
         {topics.map((topic, index) => (
-          <ListItem key={index} disablePadding>
+          <ListItem sx={{textAlign: 'center'}}key={index} disablePadding>
             <ListItemButton>
-              <ListItemText primary={topic.slug} />
+              <ListItemText primary={<Typography align="center">{topic.slug}</Typography>} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -71,7 +71,7 @@ export default function Header(props) {
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', textAlign: 'right' }}>
       <CssBaseline />
       <AppBar
         position="fixed"

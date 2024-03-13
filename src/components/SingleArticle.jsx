@@ -12,6 +12,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import Comments from "./Comments";
 
 
 export default function SingleArticle({users, setUsers}) {
@@ -51,60 +52,7 @@ export default function SingleArticle({users, setUsers}) {
                 <h3>Author: {article.author}p</h3>
                 <h4>Topic: {article.topic}</h4>
                 <p>{article.body}</p>
-                <Box sx={{ 
-            width: '100%' - drawerWidth, 
-            bgcolor: 'background.paper',
-            }}>
-            
-            <br></br>
-            <Typography
-            variant="h4"
-            sx={{ml: '70px'}}
-            >
-            Comments  
-            </Typography>
-            <br></br>
-            <Divider></Divider>
-            <nav aria-label="article list">
-            <List>
-            {comments.map((comment) => {
-                    return (
-                        <ListItem key={comment.comment_id} disablePadding>
-                        <ListItemButton>
-                            <ListItemAvatar>
-                                <Avatar src={users.filter((user)=>{
-                                    return user.username === comment.author
-                                })[0].avatar_url} />
-                            </ListItemAvatar>
-                            <ListItemText
-                            primary={comment.author}
-                            secondary={
-                            <React.Fragment>
-                            <Typography
-                                component="span"
-                                variant="subtitle1"
-                                color="text.primary"
-                            >
-                                {comment.body}
-                            </Typography>
-                            <Typography
-                                component="span"
-                                variant="body2"
-                                color="text.secondary"
-                            >
-                                <br></br>
-                                {comment.votes}  
-                            </Typography>
-                            </React.Fragment>
-                            }
-                            />
-                        </ListItemButton>
-                        </ListItem>
-                    );
-                })}
-            </List>
-            </nav>
-        </Box>
+                < Comments users={users} setUsers={setUsers}/>
             </Box>
             
         );
