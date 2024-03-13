@@ -13,7 +13,8 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Comments from "./Comments";
-
+import Votes from "./Votes";
+import { Container } from "@mui/material";
 
 export default function SingleArticle({users, setUsers}) {
     const articleId = useParams().article_id
@@ -38,11 +39,14 @@ export default function SingleArticle({users, setUsers}) {
         return <div>Loading...</div>
     } else {
         return (
-            <Box sx={{ 
+            <Container>
+                <Votes article={article}/>
+                <Box sx={{ 
                 width: '100%' - drawerWidth, 
                 bgcolor: 'background.paper',
                 ml: { sm: `${drawerWidth+30}px` },
                 }}>
+                <br></br>
                 <img src={article.article_img_url} width="100px" alt="" />
                 <Typography
                 variant="h4"
@@ -54,6 +58,8 @@ export default function SingleArticle({users, setUsers}) {
                 <p>{article.body}</p>
                 < Comments users={users} setUsers={setUsers}/>
             </Box>
+            </Container>
+            
             
         );
     }
