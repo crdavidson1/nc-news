@@ -57,4 +57,13 @@ const insertComment = (article_id, newComment, name) => {
     });
 };
 
-export { getArticles, getArticle, getComments, getTopics, getUsers, insertVotes, insertComment }
+const deleteComment = (comment_id) => {
+  console.log(comment_id)
+  return axios
+    .delete(`https://backend-project-cr4a.onrender.com/api/comments/${comment_id}`)
+    .then((data) => {
+      return data;
+    });
+};
+
+export { getArticles, getArticle, getComments, getTopics, getUsers, insertVotes, insertComment, deleteComment }

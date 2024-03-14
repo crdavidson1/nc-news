@@ -4,6 +4,7 @@ import * as React from 'react';
 import { getComments, getUsers } from "../../api";
 import Box from '@mui/material/Box';
 import {drawerWidth} from '../components/Header'
+import DeleteComment from './DeleteComment'
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -13,7 +14,7 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 
-export default function Comments({users, setUsers, isNewData}) {
+export default function Comments({users, setUsers, username, isNewData, setIsNewData}) {
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const articleId = useParams().article_id
@@ -25,6 +26,7 @@ export default function Comments({users, setUsers, isNewData}) {
             setUsers(response.data.users)
             setIsLoading(false)
         })
+        setIsNewData(false)
     }, [articleId, isNewData])
     if (isLoading) {
         return <div>Loading...</div>
@@ -75,10 +77,13 @@ export default function Comments({users, setUsers, isNewData}) {
                                 <br></br>
                                 {comment.votes}  
                             </Typography>
+                            
                             </React.Fragment>
                             }
                             />
                         </ListItemButton>
+                        <DeleteComment 
+                        comment={comment} setIsNewData={setIsNewData} username={username}/>
                         </ListItem>
                     );
                 })}
