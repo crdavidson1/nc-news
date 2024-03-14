@@ -20,7 +20,6 @@ export default function Votes({article}) {
             return newVote
         })
         insertVotes(article.article_id, newVote-prevVote).then((response)=>{
-            console.log(response.data.article)
             setVoteCount(response.data.article.votes)
         })
     }

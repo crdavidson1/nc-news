@@ -55,15 +55,23 @@ export default function Header({username}) {
     <div>
       <Toolbar />
       <List>
+      <ListItem key='home'>
+      <Link to={`/`}>
+        <ListItemText primary={<Typography align="center">Home</Typography>} />
+        </Link>
+        </ListItem>
+        <Divider />
         <ListItem key='heading'>
         <ListItemText primary={<Typography align="center">Topic</Typography>} />
         </ListItem>
         <Divider />
         {topics.map((topic, index) => (
           <ListItem sx={{textAlign: 'center'}}key={index} disablePadding>
+            <Link to={`/articles/?topic=${topic.slug}`}>
             <ListItemButton>
               <ListItemText primary={<Typography align="center">{topic.slug}</Typography>} />
             </ListItemButton>
+            </Link>
           </ListItem>
         ))}
       </List>
