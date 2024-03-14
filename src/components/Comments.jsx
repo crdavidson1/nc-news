@@ -13,7 +13,7 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 
-export default function Comments({users, setUsers}) {
+export default function Comments({users, setUsers, isNewData}) {
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const articleId = useParams().article_id
@@ -25,7 +25,7 @@ export default function Comments({users, setUsers}) {
             setUsers(response.data.users)
             setIsLoading(false)
         })
-    }, [articleId])
+    }, [articleId, isNewData])
     if (isLoading) {
         return <div>Loading...</div>
     } else if (comments.length<1) {

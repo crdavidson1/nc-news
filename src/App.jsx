@@ -7,15 +7,16 @@ import SingleArticle from './components/SingleArticle'
 
 function App() {
   const [users, setUsers] = useState([])
+  const username = 'cooljmessy'
   return (
     <>
-      <Header />
+      <Header username={username}/>
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route
           path="/articles/:article_id"
           element={
-            <SingleArticle users={users} setUsers={setUsers}/>
+            <SingleArticle users={users} setUsers={setUsers} username={username}/>
           }
         />
       </Routes>

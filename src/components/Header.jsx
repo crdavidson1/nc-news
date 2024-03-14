@@ -24,7 +24,7 @@ const drawerWidth = 180;
 
 export {drawerWidth}
 
-export default function Header(props) {
+export default function Header({username}) {
   const [topics, setTopics] = useState([])
   useEffect(() => {
       getTopics().then((response) => {
@@ -71,7 +71,7 @@ export default function Header(props) {
   );
 
   return (
-    <Box sx={{ display: 'flex', textAlign: 'right' }}>
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -92,6 +92,9 @@ export default function Header(props) {
           </IconButton>
           <Typography variant="h6" noWrap component="div">
             NC News
+          </Typography>
+          <Typography variant="h7" sx={{flexGrow: 1, textAlign:'right'}}>
+            User: {username}
           </Typography>
         </Toolbar>
       </AppBar>
