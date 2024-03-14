@@ -58,7 +58,6 @@ const insertComment = (article_id, newComment, name) => {
 };
 
 const deleteComment = (comment_id) => {
-  console.log(comment_id)
   return axios
     .delete(`https://backend-project-cr4a.onrender.com/api/comments/${comment_id}`)
     .then((data) => {
@@ -66,4 +65,13 @@ const deleteComment = (comment_id) => {
     });
 };
 
-export { getArticles, getArticle, getComments, getTopics, getUsers, insertVotes, insertComment, deleteComment }
+const getTopicalArticles = (topic) => {
+  return axios
+    .get(`https://backend-project-cr4a.onrender.com/api/articles/?topic=${topic}`)
+    .then((data) => {
+      return data;
+    });
+};
+
+
+export { getArticles, getArticle, getComments, getTopics, getUsers, insertVotes, insertComment, deleteComment, getTopicalArticles }
