@@ -6,11 +6,12 @@ import SendIcon from '@mui/icons-material/Send';
 import Button from '@mui/material/Button';
 import { insertComment } from "../../api";
 
-export default function InsertComment({article, username, setIsNewData}) {
+export default function InsertComment({article_id, username, setIsNewData}) {
   const [newComment, setNewComment] = useState('')
   function handlePost(event) {
     event.preventDefault()
-    insertComment(article.article_id, newComment, username).then(() =>{
+    console.log(article_id)
+    insertComment(article_id, newComment, username).then(() =>{
       setNewComment('')
       setIsNewData(true)
     })

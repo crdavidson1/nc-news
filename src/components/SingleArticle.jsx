@@ -58,7 +58,7 @@ export default function SingleArticle({users, setUsers, username}) {
                 <h3>Author: {article.author}p</h3>
                 <h4>Topic: {article.topic}</h4>
                 <p>{article.body}</p>
-                <InsertComment article={article} username={username} isNewData={isNewData} setIsNewData={setIsNewData}/>
+                <InsertComment article_id={article.article_id} username={username} isNewData={isNewData} setIsNewData={setIsNewData}/>
                 <Comments users={users} setUsers={setUsers} username={username} isNewData={isNewData} setIsNewData={setIsNewData}/>
             </Box>
             </Container>
