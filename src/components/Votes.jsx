@@ -24,7 +24,6 @@ export default function Votes({article}) {
             setVoteCount(response.data.article.votes)
         })
     }
-    console.log(voteCount)
     return (
         <Box sx={{ 
             width: '100%' - drawerWidth, 
