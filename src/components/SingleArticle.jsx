@@ -14,10 +14,12 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Comments from "./Comments";
 import Votes from "./Votes";
+import InsertComment from "./InsertComment";
 import { Container } from "@mui/material";
 
-export default function SingleArticle({users, setUsers}) {
+export default function SingleArticle({users, setUsers, username}) {
     const articleId = useParams().article_id
+    const [isNewData, setIsNewData] = useState(false)
     const [article, setArticle] = useState({})
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true);
@@ -56,7 +58,8 @@ export default function SingleArticle({users, setUsers}) {
                 <h3>Author: {article.author}p</h3>
                 <h4>Topic: {article.topic}</h4>
                 <p>{article.body}</p>
-                < Comments users={users} setUsers={setUsers}/>
+                <InsertComment article={article} username={username} isNewData={isNewData} setIsNewData={setIsNewData}/>
+                <Comments users={users} setUsers={setUsers} isNewData={isNewData}/>
             </Box>
             </Container>
             
