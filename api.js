@@ -13,7 +13,7 @@ const getArticle = (article_id) => {
     .get(`https://backend-project-cr4a.onrender.com/api/articles/${article_id}`)
     .then((data) => {
       return data;
-    });
+    })
 };
 
 const getComments = (article_id) => {
