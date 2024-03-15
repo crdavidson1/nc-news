@@ -65,7 +65,7 @@ export default function SortBy({setNewSort, sortBy, setSortBy, order, setOrder})
           <MenuItem value={'DESC'}>Descending</MenuItem>
         </Select>
       </FormControl>
-        <Button sx={{ }} onClick={handleSubmit}>
+        <Button onClick={handleSubmit}>
         Sort Articles
       </Button>
           <Divider></Divider>
