@@ -1,4 +1,7 @@
 import axios from "axios";
+import { useState } from "react";
+
+const [error, setError] = useState(null)
 
 const getArticles = () => {
   return axios
@@ -29,7 +32,7 @@ const insertVotes = (article_id, newVote) => {
     .patch(`https://backend-project-cr4a.onrender.com/api/articles/${article_id}/`, {inc_votes: newVote})
     .then((data) => {
       return data;
-    });
+    })
 };
 
 const getTopics = () => {

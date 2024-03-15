@@ -13,6 +13,7 @@ import { insertVotes } from "../../api";
 export default function Votes({article}) {
     const [voteCount, setVoteCount] = useState(article.votes)
     const [vote, setVote] = useState('')
+    const [error, setError] = useState(null)
     const handleChange = (event, newVote) => {
         let prevVote = 0
         setVote((oldVote)=>{
@@ -22,6 +23,13 @@ export default function Votes({article}) {
         insertVotes(article.article_id, newVote-prevVote).then((response)=>{
             setVoteCount(response.data.article.votes)
         })
+        .catch((err) => {
+          setError({err})
+        })
+    }
+    if (error) {
+      console.log(error.msg)
+      return <p>Voting is not possible right now - please try again later</p>
     }
     return (
         <Box sx={{ 
