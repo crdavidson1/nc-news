@@ -14,11 +14,13 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 
-export default function Comments({users, setUsers, username, isNewData, setIsNewData}) {
+export default function Comments({ username, isNewData, setIsNewData}) {
+    const [users, setUsers] = useState([])
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const articleId = useParams().article_id
     useEffect(() => {
+        setIsLoading(true)
         getComments(articleId).then((response) => {
             setComments(response.data.comments)
         })
@@ -26,7 +28,6 @@ export default function Comments({users, setUsers, username, isNewData, setIsNew
             setUsers(response.data.users)
             setIsLoading(false)
         })
-        console.log('rerender')
         setIsNewData(false)
     }, [articleId, isNewData])
     if (isLoading) {

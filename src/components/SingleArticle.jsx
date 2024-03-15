@@ -17,29 +17,46 @@ import Votes from "./Votes";
 import InsertComment from "./InsertComment";
 import { Container } from "@mui/material";
 
-export default function SingleArticle({users, setUsers, username}) {
+export default function SingleArticle({username}) {
     const articleId = useParams().article_id
     const [isNewData, setIsNewData] = useState(false)
+    const [error, setError] = useState('')
     const [article, setArticle] = useState({})
-    const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
+        setIsLoading(true)
         getArticle(articleId).then((response) => {
-            
             setArticle(response.data.article)
-        })
-        getComments(articleId).then((response) => {
-            setComments(response.data.comments)
-        })
-        getUsers().then((response) => {
-            setUsers(response.data.users)
             setIsLoading(false)
+        })
+        .catch((err) => {
+            setIsLoading(false)
+            setError(err.response.data.msg)
         })
     }, [articleId])
     const date = new Date(article.created_at).toDateString()
     if (isLoading) {
-        return <div>Loading...</div>
-    } else {
+        return (
+            <Box sx={{ 
+                width: '100%' - drawerWidth, 
+                bgcolor: 'background.paper',
+                ml: { sm: `${drawerWidth+30}px` },
+                }}>
+                <div>Loading...</div>
+            </Box>
+        )
+    } else if (error) {
+        return (
+            <Box sx={{ 
+                width: '100%' - drawerWidth, 
+                bgcolor: 'background.paper',
+                ml: { sm: `${drawerWidth+30}px` },
+                }}>
+                <div>{error}</div>
+            </Box>
+        )
+    }
+    else {
         return (
             <Container>
                 <Votes article={article}/>
@@ -59,7 +76,7 @@ export default function SingleArticle({users, setUsers, username}) {
                 <h4>Topic: {article.topic}</h4>
                 <p>{article.body}</p>
                 <InsertComment article_id={article.article_id} username={username} isNewData={isNewData} setIsNewData={setIsNewData}/>
-                <Comments users={users} setUsers={setUsers} username={username} isNewData={isNewData} setIsNewData={setIsNewData}/>
+                <Comments username={username} isNewData={isNewData} setIsNewData={setIsNewData}/>
             </Box>
             </Container>
             

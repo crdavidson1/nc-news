@@ -10,12 +10,13 @@ export default function InsertComment({article_id, username, setIsNewData}) {
   const [newComment, setNewComment] = useState('')
   function handlePost(event) {
     event.preventDefault()
-    console.log(article_id)
-    insertComment(article_id, newComment, username).then(() =>{
-      setNewComment('')
-      setIsNewData(true)
-    })
-  }
+    if (newComment) {
+      insertComment(article_id, newComment, username).then(() =>{
+        setNewComment('')
+        setIsNewData(true)
+      })
+    }
+    }
   function handleInput(event) {
     setNewComment(event.target.value)
   }
