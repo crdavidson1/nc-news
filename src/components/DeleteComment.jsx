@@ -9,7 +9,6 @@ import { deleteComment } from "../../api";
 export default function DeleteComment({comment, setIsNewData, username}) {
     function handleDelete(event) {
         event.preventDefault()
-        console.log(comment.comment_id)
         deleteComment(comment.comment_id).then(() =>{
         setIsNewData(true)
         })
