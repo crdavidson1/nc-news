@@ -26,6 +26,7 @@ export default function Comments({users, setUsers, username, isNewData, setIsNew
             setUsers(response.data.users)
             setIsLoading(false)
         })
+        console.log('rerender')
         setIsNewData(false)
     }, [articleId, isNewData])
     if (isLoading) {

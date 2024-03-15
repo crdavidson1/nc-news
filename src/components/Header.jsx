@@ -67,7 +67,7 @@ export default function Header({username}) {
         <Divider />
         {topics.map((topic, index) => (
           <ListItem sx={{textAlign: 'center'}}key={index} disablePadding>
-            <Link to={`/articles/?topic=${topic.slug}`}>
+            <Link to={`/?topic=${topic.slug}`}>
             <ListItemButton>
               <ListItemText primary={<Typography align="center">{topic.slug}</Typography>} />
             </ListItemButton>

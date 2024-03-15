@@ -1,11 +1,8 @@
 import axios from "axios";
-import { useState } from "react";
 
-const [error, setError] = useState(null)
-
-const getArticles = () => {
+const getArticles = (sortBy, order) => {
   return axios
-    .get("https://backend-project-cr4a.onrender.com/api/articles")
+    .get(`https://backend-project-cr4a.onrender.com/api/articles/?sort_by=${sortBy}&order=${order}`)
     .then((data) => {
       return data;
     });
@@ -68,9 +65,9 @@ const deleteComment = (comment_id) => {
     });
 };
 
-const getTopicalArticles = (topic) => {
+const getTopicalArticles = (topic, sortBy, order) => {
   return axios
-    .get(`https://backend-project-cr4a.onrender.com/api/articles/?topic=${topic}`)
+    .get(`https://backend-project-cr4a.onrender.com/api/articles/?sort_by=${sortBy}&order=${order}&topic=${topic}`)
     .then((data) => {
       return data;
     });

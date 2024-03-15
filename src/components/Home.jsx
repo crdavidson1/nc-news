@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import { getArticles } from "../../api"
+import { getArticles, getTopicalArticles } from "../../api"
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import SortBy from "./SortBy";
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -10,17 +12,30 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import {drawerWidth} from '../components/Header'
  
 
 export default function Home() {
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search)
+  const topic = searchParams.get('topic')
+  const [sortBy, setSortBy] = useState('created_at');
+  const [order, setOrder] = useState('DESC');
+  const [newSort, setNewSort] = useState(false)
   const [articles, setArticles] = useState([])
+
   useEffect(() => {
-      getArticles().then((response) => {
+    if (topic) {
+      getTopicalArticles(topic, sortBy, order).then((response) => {
+        setArticles(response.data.articles)
+    })
+    } else {
+      getArticles(sortBy, order).then((response) => {
           setArticles(response.data.articles)
       })
-  }, [])
+    }
+    setNewSort(false)
+  }, [topic, newSort])
     return (
       <Box sx={{ 
         width: '100%' - drawerWidth, 
@@ -33,6 +48,8 @@ export default function Home() {
         >
           Latest  
         </Typography>
+        <br></br>
+        <SortBy setNewSort={setNewSort} sortBy={sortBy} setSortBy={setSortBy} order={order} setOrder={setOrder}/>
         <nav aria-label="article list">
           <List>
           {articles.map((article) => {
