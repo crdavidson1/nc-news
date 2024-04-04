@@ -17,10 +17,9 @@ This project uses the React library to create a website called Northcoders News,
 
 To run this project, the repo must be cloned in your local directory.
 
-This project relies on [node](http://nodejs.org) and [npm](https://npmjs.com). Node.js version 18 is the minimum version required for this project.
+This project relies on [react](https://react.dev/) and [npm](https://npmjs.com). Node.js version 18 is the minimum version required for this project.
 
 Using npm, the following dependencies must be installed: 
-- [react](https://react.dev/)
 - [react-dom](https://www.npmjs.com/package/react-dom)
 - [react-router-dom](https://reactrouter.com/en/main/start/tutorial)
 - [axios](https://axios-http.com/docs/intro)
