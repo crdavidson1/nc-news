@@ -53,7 +53,7 @@ export default function Home() {
             bgcolor: 'background.paper',
             ml: { sm: `${drawerWidth+30}px` },
             }}>
-            <div>Loading...</div>
+            <div>Loading... This might take a while.</div>
         </Box>
     )
 } else if (error) {
